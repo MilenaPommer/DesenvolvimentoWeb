@@ -1,63 +1,8 @@
 import './App.css'
-
-function Navigation() {
-  return(
-    <nav>
-      <ul>
-         <li><a href="#">Home</a></li>
-          <li><a href="#">Sobre</a></li>
-          <li><a href="#">Contato</a></li>
-      </ul>
-    </nav>
-  )
-}
-
-function Header() {
-  return(
-    <header>
-      <h1>Meu Blog de Viagens</h1>
-      <Navigation/>
-    </header>
-  );
-}
-
-function Sidebar() {
-  return(
-    <aside>
-        <h3>Posts Relacionados</h3>
-        <ul>
-            <li><a href="#">Descobrindo as Praias de Santa Catarina</a></li>
-            <li><a href="#">Descobrindo as Startups de Cascavel</a></li>
-            <li><a href="#">Endrews Ross</a></li>
-        </ul>
-    </aside>
-  )
-}
-
-function Footer() {
-  return(
-    <footer>
-        <p>&copy; 2026 - Todos os direitos reservados.</p>
-    </footer>
-  )
-}
-
-function Article(props) {
-
-  return(
-    <article>
-      <h2>{props.titulo}</h2>
-      <time dateTime="2005-04-01">{props.data}</time>
-      <p>Autor: {props.autor}</p>
-      <p>{props.texto1}</p>
-      <p>{props.texto2}</p>
-      <figure>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt2LQAGK2Y8lhyXfVrwoNAudqNGL1UMw_k6A&s" alt="Imagem de uma praia do Nordeste com uma igreja branca e verde ao meio e muitos coqueiros"/>
-        <figcaption>Exemplo de uma praia do Nordeste com uma igreja branca e verde ao meio e muitos coqueiros</figcaption>
-      </figure>
-    </article>
-  )
-}
+import Header from './components/Header'
+import Article from './components/Article'
+import Sidebar from './components/Sidebar'
+import Footer from './components/Footer'
 
 function App() {
 
