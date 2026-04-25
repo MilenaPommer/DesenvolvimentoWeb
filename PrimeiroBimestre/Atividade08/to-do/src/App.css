@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: pink;
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+header h1 {
+  margin-bottom: 20px;
+}
+
+.adicionar-section,
+.lista-section {
+  margin-bottom: 24px;
+}
+
+.adicionar-section h2,
+.lista-section h2 {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+input[type="text"] {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #C71585;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+button:hover {
+  background-color: #a0106d;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  gap: 10px;
+  border-radius: 4px;
+}
+
+li:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+li span {
+  flex: 1;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.btn-remover {
+  background-color: #8B0000;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+}
+
+.btn-remover:hover {
+  background-color: #600000;
+}
