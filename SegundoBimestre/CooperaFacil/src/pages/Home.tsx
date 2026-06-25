@@ -132,7 +132,7 @@ export default function Home() {
                     <span>
                         <h2>Soluções</h2>
                         <span className="desktop-only">
-                            <h2>Soluções para cooperativas e piscicultores</h2>
+                            <h2>Para cooperativas e piscicultores</h2>
                         </span>
                     </span>
                     <p>

@@ -43,7 +43,7 @@
 
   textarea {
     min-height: 8rem;
-    resize: vertical;
+    resize: none;
   }
 
   input:focus, textarea:focus {
