@@ -25,6 +25,7 @@ export default function Home() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
+    const [statusText, setStatusText] = useState("");
 
     useEffect(() => {
         const html = document.querySelector("html");
@@ -32,6 +33,35 @@ export default function Home() {
             html.style.overflow = showMobileMenu ? "hidden" : "auto";
         }
     }, [showMobileMenu]);
+
+    async function sendContactEmail() {
+        if (!email || !message) {
+            setStatusText("Por favor, preencha todos os campos.");
+            return;
+        }
+
+        setStatusText("Enviando sua mensagem...");
+
+        try {
+            const response = await fetch("/api/send-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, message }),
+            });
+
+            if (!response.ok) {
+                const body = await response.json().catch(() => ({}));
+                throw new Error(body.error ?? "Erro ao enviar mensagem.");
+            }
+
+            setStatusText("Mensagem enviada! Agradecemos por entrar em contato!");
+            setEmail("");
+            setMessage("");
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : "Falha ao enviar. Tente novamente.";
+            setStatusText(errorMessage);
+        }
+    }
 
     return (
         <>
@@ -210,7 +240,6 @@ export default function Home() {
                     />
                 </section>
             </section>
-
             <section id="contact" className="container">
                 <header>
                     <h2>Fale com nossa equipe</h2>
@@ -232,8 +261,18 @@ export default function Home() {
                         onChange={(e) => setMessage(e.target.value)}
                     />
                     <span>
-                        <Button text="Enviar" />
+                        <button
+                            className="btn-primary"
+                            onClick={sendContactEmail}
+                        >
+                            Enviar
+                        </button>
                     </span>
+                    {statusText && (
+                        <p style={{ textAlign: "center", color: "var(--primary-color)", marginTop: "1rem", fontWeight: "bold" }}>
+                            {statusText}
+                        </p>
+                    )}
                 </div>
             </section>
             <footer>
