@@ -1,0 +1,55 @@
+#hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    background-image: url("../assets/FundoPeixes.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+#hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    opacity: 0.5;
+    z-index: 0;
+}
+
+#hero p {
+    color: var(--second-text-color);
+}
+
+#hero .content {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+    gap: 1.75rem;
+}
+
+#hero .content > div {
+    width: fit-content;
+    align-self: center;
+}
+
+@media (width >= 1280px) {
+    .content p {
+        width: 60%;
+        align-self: center;
+    }
+
+    .content {
+        gap: 2.5rem;
+    }
+
+    .content p:first-of-type {
+        color: var(--primary-color);
+        font-weight: var(--fw-bold);
+    }
+}
