@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "../components/Button";
 import Card from "../components/Card";
 import TestimonialCard from "../components/TestimonialCards";
 import PricingCards from "../components/PricingCards";
+import ReCAPTCHA from 'react-google-recaptcha';
 import LogoLonga from "../assets/LogoLonga.svg";
 import close from "../assets/close.svg";
 import menu from "../assets/menu.svg";
@@ -27,6 +28,9 @@ export default function Home() {
     const [message, setMessage] = useState("");
     const [statusText, setStatusText] = useState("");
 
+    const [isChallengeCompleted, setChallengeCompleted] = useState(false);
+    const recaptchaRef = useRef<ReCAPTCHA>(null);
+
     useEffect(() => {
         const html = document.querySelector("html");
         if (html) {
@@ -37,6 +41,11 @@ export default function Home() {
     async function sendContactEmail() {
         if (!email || !message) {
             setStatusText("Por favor, preencha todos os campos.");
+            return;
+        }
+
+        if (!isChallengeCompleted) {
+            setStatusText("Confirme que você não é um robô.");
             return;
         }
 
@@ -57,10 +66,18 @@ export default function Home() {
             setStatusText("Mensagem enviada! Agradecemos por entrar em contato!");
             setEmail("");
             setMessage("");
+            setChallengeCompleted(false);
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : "Falha ao enviar. Tente novamente.";
             setStatusText(errorMessage);
+
+            recaptchaRef.current?.reset();
+            setChallengeCompleted(false);
         }
+    }
+
+    function handleCompleteChallenge(token: string | null) {
+        setChallengeCompleted(!!token);
     }
 
     return (
@@ -259,6 +276,12 @@ export default function Home() {
                         placeholder="Informe o motivo do contato."
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
+                    />
+                    <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                        onChange={handleCompleteChallenge}
+                        theme="dark"
                     />
                     <span>
                         <button
